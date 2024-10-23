@@ -23,7 +23,36 @@
  <!-- /Yandex.Metrika counter -->
 </head>
 <body>
-    <p> Hellow world</p>
-    <button>Tab</button>
+    <div style="display:none" class="ver1">
+        <p> Hellow <span onmouseover="ym(98711035,'reachGoal','mouseOverWord')">world</span></p>
+        <button>Tab1</button>
+    </div>
+
+    <div style="display:none" class="ver2">
+        <p> Bad <span onmouseover="ym(98711035,'reachGoal','mouseOverWord')">world</span></p>
+        <button>Tab2</button>
+    </div>
+
+    <div style="display:none" class="ver3">
+        <p> DAD <span onmouseover="ym(98711035,'reachGoal','mouseOverWord')">world</span></p>
+        <button>Tab3</button>
+    </div>
 </body>
+<script>
+    var tries=20;
+    getVersion();
+
+    function getVersion(){
+        tries --;
+        let uid = localStorage.getItem("_ym_uid");
+        if(uid){
+            let version = JSON.parse(uid).substr(-8)%5;
+            document.querySelector(".ver"+version).style.display="block";
+        }
+        else {
+            if(tries>0) setTimeout(getVersion, 500);
+        }
+    }
+</script>
+
 </html>
